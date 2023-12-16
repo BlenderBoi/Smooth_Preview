@@ -33,6 +33,7 @@ class SP_Set_Smooth(bpy.types.Operator):
                         if modifier.type == "SUBSURF":
 
                             modifier.show_viewport =self.smooth
+                            modifier.show_on_cage = self.smooth
                             modifier.show_render =self.smooth
 
                             modifier.levels =context.scene.subsurf_amt
@@ -70,12 +71,12 @@ class SP_Set_Smooth(bpy.types.Operator):
                                 if curentmode == "SCULPT":
                                     bpy.ops.object.mode_set(mode='SCULPT', toggle=False)
 
-
                 else:
                     modifier = object.modifiers.new("Subdivision", "SUBSURF")
 
                     modifier.show_viewport =self.smooth
                     modifier.show_render =self.smooth
+                    modifier.show_on_cage = self.smooth
 
                     modifier.levels =context.scene.subsurf_amt
                     modifier.render_levels = context.scene.subsurf_amt
