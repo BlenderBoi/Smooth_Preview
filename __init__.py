@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Smooth Preview",
-    "author": "Diong Wen-Han",
-    "version": (1, 3),
-    "blender": (3, 1, 0),
+    "author": "BlenderBoi",
+    "version": (1, 4),
+    "blender": (4, 0, 0),
     "description": "Smooth Preview that acts similar like in maya 3",
     "wiki_url": "",
     "category": "Utility",
