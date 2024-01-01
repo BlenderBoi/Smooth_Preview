@@ -11,6 +11,7 @@ class SP_user_preferences(bpy.types.AddonPreferences):
 
     Modifier_Button : bpy.props.BoolProperty(default=True)
     Set_Smooth_Button : bpy.props.BoolProperty(default=True)
+    Use_Auto_Smooth: bpy.props.BoolProperty(default=False)
 
 
     def draw(self, context):
@@ -54,6 +55,7 @@ class SP_user_preferences(bpy.types.AddonPreferences):
 
         col.prop(self, "Modifier_Button", text="Use Modifier Buttons")
         col.prop(self, "Set_Smooth_Button", text="Use Smooth Preview Buttons")
+        col.prop(self, "Use_Auto_Smooth", text="Use Auto Smooth Instead of Shade Smooth")
 
 addon_keymaps = []
 

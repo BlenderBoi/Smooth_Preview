@@ -24,6 +24,7 @@ class SP_Set_Smooth(bpy.types.Operator):
 
     def execute(self, context):
 
+        preferences = context.preferences.addons[__package__].preferences
 
         for object in context.selected_objects:
 
@@ -49,7 +50,10 @@ class SP_Set_Smooth(bpy.types.Operator):
                                     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 
 
-                                bpy.ops.object.shade_smooth()
+                                if preferences.Use_Auto_Smooth:
+                                    object.data.use_auto_smooth = True
+                                else:
+                                    bpy.ops.object.shade_smooth()
 
                                 if curentmode == "EDIT":
                                     bpy.ops.object.mode_set(mode='EDIT', toggle=False)
@@ -64,7 +68,10 @@ class SP_Set_Smooth(bpy.types.Operator):
                                 if context.object.mode == "SCULPT":
                                     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 
-                                bpy.ops.object.shade_flat()
+                                if preferences.Use_Auto_Smooth:
+                                    object.data.use_auto_smooth = False
+                                else:
+                                    bpy.ops.object.shade_flat()
 
                                 if curentmode == "EDIT":
                                     bpy.ops.object.mode_set(mode='EDIT', toggle=False)
@@ -85,13 +92,27 @@ class SP_Set_Smooth(bpy.types.Operator):
 
                     if context.object.mode == "EDIT":
                         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
-                        bpy.ops.object.shade_smooth()
+
+                        if preferences.Use_Auto_Smooth:
+                            object.data.use_auto_smooth = True
+                        else:
+                            bpy.ops.object.shade_smooth()
+
+
 
                     if context.object.mode == "SCULPT":
                         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
-                        bpy.ops.object.shade_smooth()
+
+                        if preferences.Use_Auto_Smooth:
+                            object.data.use_auto_smooth = True
+                        else:
+                            bpy.ops.object.shade_smooth()
+
                     else:
-                        bpy.ops.object.shade_smooth()
+                        if preferences.Use_Auto_Smooth:
+                            object.data.use_auto_smooth = True
+                        else:
+                            bpy.ops.object.shade_smooth()
 
                     if curentmode == "EDIT":
                         bpy.ops.object.mode_set(mode='EDIT', toggle=False)
@@ -200,8 +221,9 @@ class SP_Set_Smooth_Menu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
+        preferences = context.preferences.addons[__package__].preferences
         layout.prop(context.scene, "subsurf_amt", text="Levels")
-
+        layout.prop(preferences, "Use_Auto_Smooth", text="Use Auto Smooth")
 
         layout.operator("vh.apply_smooth", text="Apply")
 
@@ -338,8 +360,6 @@ def draw_item(self, context):
 
     if preferences.Set_Smooth_Button:
         row.operator("vh.set_smooth", text="Smooth").smooth=True
-
-
         row.operator("vh.set_smooth", text="Normal").smooth=False
         row.menu("SP_MT_SetSmooth_Menu", text="", icon="DOWNARROW_HLT")
         row.separator()
@@ -375,7 +395,6 @@ def register():
         bpy.utils.register_class(cls)
 
     bpy.types.Scene.subsurf_amt = bpy.props.IntProperty(name="", default=1, min=0, soft_max = 4)
-
     # bpy.types.Scene.Modifier_Button = bpy.props.BoolProperty(default=True)
     # bpy.types.Scene.Set_Smooth_Button = bpy.props.BoolProperty(default=True)
 
