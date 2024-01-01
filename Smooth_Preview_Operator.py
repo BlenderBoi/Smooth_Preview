@@ -51,7 +51,8 @@ class SP_Set_Smooth(bpy.types.Operator):
 
 
                                 if not preferences.No_Shade_Smooth:
-                                    bpy.ops.object.shade_smooth()
+                                    if not object.data.use_auto_smooth:
+                                        bpy.ops.object.shade_smooth()
 
                                 if curentmode == "EDIT":
                                     bpy.ops.object.mode_set(mode='EDIT', toggle=False)
@@ -67,7 +68,8 @@ class SP_Set_Smooth(bpy.types.Operator):
                                     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 
                                 if not preferences.No_Shade_Smooth:
-                                    bpy.ops.object.shade_flat()
+                                    if not object.data.use_auto_smooth:
+                                        bpy.ops.object.shade_flat()
 
                                 if curentmode == "EDIT":
                                     bpy.ops.object.mode_set(mode='EDIT', toggle=False)
@@ -90,7 +92,8 @@ class SP_Set_Smooth(bpy.types.Operator):
                         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 
                         if not preferences.No_Shade_Smooth:
-                            bpy.ops.object.shade_smooth()
+                            if not object.data.use_auto_smooth:
+                                bpy.ops.object.shade_smooth()
 
 
 
@@ -98,11 +101,13 @@ class SP_Set_Smooth(bpy.types.Operator):
                         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 
                         if not preferences.No_Shade_Smooth:
-                            bpy.ops.object.shade_smooth()
+                            if not object.data.use_auto_smooth:
+                                bpy.ops.object.shade_smooth()
 
                     else:
                         if not preferences.No_Shade_Smooth:
-                            bpy.ops.object.shade_smooth()
+                            if not object.data.use_auto_smooth:
+                                bpy.ops.object.shade_smooth()
 
                     if curentmode == "EDIT":
                         bpy.ops.object.mode_set(mode='EDIT', toggle=False)
