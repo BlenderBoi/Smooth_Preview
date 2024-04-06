@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Smooth Preview",
     "author": "BlenderBoi",
-    "version": (1, 4),
-    "blender": (4, 0, 0),
+    "version": (1, 5),
+    "blender": (4, 1, 0),
     "description": "Smooth Preview that acts similar like in maya 3",
     "wiki_url": "",
     "category": "Utility",
@@ -24,7 +24,6 @@ def unregister():
 
     Smooth_Preview_Operator.unregister()
     Smooth_Preview_Preferences.unregister()
-
 
 
 if __name__ == "__main__":
